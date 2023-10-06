@@ -1,0 +1,54 @@
+import random
+import time
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+def compute_staircase(points):
+    if len(points) <= 1:
+        return points
+
+    mid = len(points) // 2
+    P_left = points[:mid]
+    P_right = points[mid:]
+
+    staircase_left = compute_staircase(P_left)
+    staircase_right = compute_staircase(P_right)
+
+    return merge(staircase_left, staircase_right)
+
+def merge(staircase_left, staircase_right):
+    merged_staircase = []
+    i, j = 0, 0
+
+    while i < len(staircase_left) and j < len(staircase_right):
+        if staircase_left[i].y < staircase_right[j].y:
+            merged_staircase.append(staircase_left[i])
+            i += 1
+        else:
+            merged_staircase.append(staircase_right[j])
+            j += 1
+
+    merged_staircase.extend(staircase_left[i:])
+    merged_staircase.extend(staircase_right[j:])
+
+    return merged_staircase
+
+# Function to generate random points
+def generate_random_points(n):
+    return [Point(random.randint(1, 1000), random.randint(1, 1000)) for _ in range(n)]
+
+# Measure the execution time for given values of n
+values_of_n = [10, 100, 1000, 10000, 100000]
+
+for n in values_of_n:
+    points = generate_random_points(n)
+    points.sort(key=lambda p: p.x)
+
+    start_time = time.time()
+    compute_staircase(points)
+    end_time = time.time()
+
+    print(f"Time taken for n={n}: {end_time - start_time} seconds")
