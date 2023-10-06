@@ -11,11 +11,11 @@ def compute_staircase(points):
         return points
 
     mid = len(points) // 2
-    P_left = points[:mid]
-    P_right = points[mid:]
+    point_left = points[:mid]
+    point_right = points[mid:]
 
-    staircase_left = compute_staircase(P_left)
-    staircase_right = compute_staircase(P_right)
+    staircase_left = compute_staircase(point_left)
+    staircase_right = compute_staircase(point_right)
 
     return merge(staircase_left, staircase_right)
 
@@ -25,7 +25,7 @@ def merge(staircase_left, staircase_right):
     i, j = 0, 0
 
     while i < len(staircase_left) and j < len(staircase_right):
-        if staircase_left[i].y < staircase_right[j].y:
+        if staircase_left[i].y > staircase_right[j].y:
             merged_staircase.append(staircase_left[i])
             i += 1
         else:
