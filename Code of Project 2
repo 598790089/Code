@@ -19,6 +19,7 @@ def compute_staircase(points):
 
     return merge(staircase_left, staircase_right)
 
+
 def merge(staircase_left, staircase_right):
     merged_staircase = []
     i, j = 0, 0
@@ -36,11 +37,10 @@ def merge(staircase_left, staircase_right):
 
     return merged_staircase
 
-# Function to generate random points
-def generate_random_points(n):
-    return [Point(random.randint(1, 1000), random.randint(1, 1000)) for _ in range(n)]
 
-# Measure the execution time for given values of n
+def generate_random_points(n):
+    return [Point(random.randint(1, 1000), random.randint(1, 1000)) for i in range(n)]
+
 values_of_n = [10, 100, 1000, 10000, 100000]
 
 for n in values_of_n:
